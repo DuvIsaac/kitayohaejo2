@@ -27,7 +27,7 @@ PASSENGER_RADIUS = 5
 TRAIN_RADIUS = 10
 MAX_PASSENGERS = 6
 TRAIN_SPEED = 2
-MAX_CONNECTIONS = 40
+MAX_CONNECTIONS = 300
 WINNING_SCORE = 150
 
 # Debounce time for clicks (in seconds)
@@ -295,8 +295,8 @@ class Game:
 
         self.draw_buttons(screen)
 
-        lines_text = self.font.render(f"Available Connections: {self.available_connections}", True, BLACK)
-        screen.blit(lines_text, (10, 60))
+        #lines_text = self.font.render(f"Available Connections: {self.available_connections}", True, BLACK)
+        #screen.blit(lines_text, (10, 60))
 
     def draw_optimization(self, screen):
         for line in self.optimized_lines.values():
@@ -360,6 +360,7 @@ class Game:
         self.game_over = False
         self.winner = None
         self.game_over_time = None
+        self.calculate_optimal_routes()
 
     def clear_all_labels(self):
         for station in self.stations:
@@ -401,7 +402,7 @@ class Game:
         clock = pygame.time.Clock()
         running = True
 
-        for _ in range(45):  # Generate 40 stations initially
+        for _ in range(50):  # Generate 45 stations initially
             self.generate_station()
 
         self.calculate_optimal_routes()
